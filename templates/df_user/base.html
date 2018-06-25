@@ -1,0 +1,49 @@
+{% extends 'base_foot.html' %}
+{% load staticfiles %}
+{% load static from staticfiles %}
+{% block body %}
+<div class="header_con">
+    <div class="header">
+        <div class="welcome fl">此页面仅用作测试,如有侵权请联系删除!</div>
+        <div class="fr">
+            {% if request.session.user_name|default:'' != '' %}
+            <div class="login_info fl">
+                欢迎您：<em>{{request.session.user_name}}</em>
+                <span>|</span>
+                <a href="{% url 'df_user:logout' %}">退出</a>
+            </div>
+            {% else %}
+            <div class="login_btn fl">
+                <a href="{% url 'df_user:login' %}">登录</a>
+                <span>|</span>
+                <a href="{% url 'df_user:register' %}">注册</a>
+            </div>
+            {% endif %}
+            <div class="user_link fl">
+                <span>|</span>
+                <a href="{% url 'df_user:info' %}">用户中心</a>
+                <span>|</span>
+                <a href="{% url 'df_cart:cart' %}">我的购物车</a>
+                <span>|</span>
+                <a href="{% url 'df_user:order' 1 %}">我的订单</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="search_bar clearfix">
+	<a href="{%url 'df_goods:index'%}" class="logo fl"><img src="{% static 'images/logo.png' %}"></a>
+	<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
+	<div class="search_con fr">
+		<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+		<input type="button" class="input_btn fr" name="" value="搜索">
+	</div>
+    <!--<div class="guest_cart fr">-->
+			<!--<a href="#" class="cart_name fl">我的购物车</a>-->
+			<!--<div class="goods_count fl" id="show_count">1</div>-->
+		<!--</div>-->
+</div>
+
+{% block body2%}{% endblock body2%}
+
+
+{% endblock body %}
